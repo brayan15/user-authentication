@@ -1,0 +1,22 @@
+.app {
+  display: flex;
+  flex: 1;
+  height: 100%;
+  min-height: 500px;
+
+  &__layout {
+    width: 100%;
+  }
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  background-color: $white;
+  min-height: calc(100vh - 134px);
+  padding: 0 50px 30px;
+
+  @media (max-width: $max-xs) {
+    min-height: calc(100vh - 194px);
+  }
+}

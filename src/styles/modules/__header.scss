@@ -1,0 +1,52 @@
+.header {
+  &__container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__branding,
+  &__branding-link {
+    color: $white;
+  }
+
+  &__menu-nav{
+    display: flex;
+  }
+
+  &__menu-item {
+    list-style: none;
+    margin: 0 5px;
+  }
+
+  &__menu-link {
+    color: $athens-gray;
+    display: block;
+    padding: 0 10px;
+
+    &:hover {
+      background: $athens-gray;
+      color: $midnight;
+    }
+  }
+
+  &__menu-icon {
+    cursor: pointer;
+    font-size: 17px;
+    color: $white;
+  }
+
+
+  @media (max-width: $max-xs) {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    text-align: center;
+    padding: 30px 50px;
+
+    &__branding {
+      height: auto;
+      line-height: initial;
+      margin-bottom: 15px;
+    }
+  }
+}

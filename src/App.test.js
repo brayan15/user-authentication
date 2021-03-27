@@ -10,7 +10,7 @@ describe('App tests', () => {
   })
 
   test('renders component', () => {
-    const container = wrapper.find('.App')
+    const container = wrapper.find('.app')
 
     expect(container.exists()).toBe(true)
   })
