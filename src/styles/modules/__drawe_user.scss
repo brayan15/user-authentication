@@ -1,4 +1,17 @@
 .drawer-user {
+  &__title {
+    display: flex;
+    align-items: center;
+  }
+
+  &__title-avatar {
+    margin-right: 10px;
+  }
+
+  &__title-name {
+    margin: 0;
+  }
+
   .ant-drawer-body {
     padding-bottom: 80px;
   }

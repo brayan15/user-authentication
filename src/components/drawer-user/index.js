@@ -1,14 +1,9 @@
 import React from 'react'
 import { UserOutlined } from '@ant-design/icons'
-import { Drawer, Form, Button, Input, Spin } from 'antd'
+import { Drawer, Form, Button, Input, Spin, Avatar } from 'antd'
+import type { UserT } from '../../store/app/users/types'
 
-type BasicUserT = {
-  email: string,
-  first_name: string,
-  last_name: string
-}
-
-type PropsT = BasicUserT & {
+type PropsT = UserT & {
   visible: boolean,
   onSave: Function,
   onClose: Function,
@@ -17,6 +12,7 @@ type PropsT = BasicUserT & {
 
 const DrawerUser = ({
   email,
+  avatar,
   onSave,
   visible,
   onClose,
@@ -30,7 +26,12 @@ const DrawerUser = ({
       onClose={onClose}
       visible={visible}
       className='drawer-user'
-      title={`Edit ${first_name} ${last_name}`}
+      title={
+        <div className='drawer-user__title'>
+          <Avatar src={avatar}  className='drawer-user__title-avatar'/>
+          <p className='drawer-user__title-name'>Edit {first_name} {last_name}</p>
+        </div>
+      }
       footer={
         <div className='drawer-user__bottom-button'>
           <Button onClick={onClose}>Close</Button>
