@@ -1,0 +1,10 @@
+.user-list {
+  &__photo {
+    margin: 15px auto 0;
+    max-width: 200px;
+  }
+
+  .user-list__photo {
+    border-radius: 50%;
+  }
+}

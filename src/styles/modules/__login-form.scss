@@ -1,7 +1,6 @@
 .login-form {
-  align-items: center;
-  display: flex;
-  height: 100%;
+  @extend .vertical-center;
+
   margin: 20px 0;
 
   &__title {

@@ -1,6 +1,7 @@
 // @flow
 import React from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import Home from './pages/Home'
 import LoginForm from './components/login-form'
 import AppContainer from './components/app-container'
 // $FlowFixMe
@@ -14,7 +15,7 @@ function App() {
           {/*Router goes here*/}
           <Switch>
             <Route exact path='/'>
-              <p>Home</p>
+              <Home />
             </Route>
             <Route exact path='/login'>
               <LoginForm />
