@@ -10,7 +10,7 @@ const initialState = {
 const reducer = (state: AuthenticationT = initialState, { type, payload }: ActionT) => {
   switch (type) {
     case SET_IS_USER_LOGGED:
-      return { isLogged: true }
+      return { isLogged: payload }
     case SUCCEED_LOGIN:
       return { isLogged: true }
     case LOG_OUT: {

@@ -1,13 +1,21 @@
 // @flow
 import React from 'react'
-import { Layout, Row, Col } from 'antd'
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { Layout, Row, Col, Button } from 'antd'
 import { LogoutOutlined } from '@ant-design/icons'
+import { useDispatch, useSelector } from 'react-redux'
+import { removeUserToken } from '../../utils/helpers'
+import { logOut } from '../../store/local/authentication/actions'
 import { isUserLogged } from '../../store/local/authentication/selectors'
 
 const Header = () => {
   const isLogged = useSelector(isUserLogged)
+  const dispatch = useDispatch()
+
+  const onLogOutClick = () => {
+    dispatch(logOut())
+    removeUserToken()
+  }
 
   return (
     <Layout.Header className='header'>
@@ -32,7 +40,11 @@ const Header = () => {
               </li>
               {isLogged ? (
                 <li className='header__menu-item'>
-                  <LogoutOutlined className='header__menu-icon' />
+                  <Button
+                    type='link'
+                    onClick={onLogOutClick}
+                    icon={<LogoutOutlined className='header__menu-icon' />}
+                  />
                 </li>
               ) : null}
             </ul>

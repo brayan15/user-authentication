@@ -1,15 +1,41 @@
 // @flow
 import React from 'react'
-import { Form, Input, Button, Row, Col } from 'antd'
+import { useDispatch } from 'react-redux'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
+import { Form, Input, Button, Row, Col, Spin, notification } from 'antd'
+import useLogin from '../../hooks/useLogin'
+import { setUserToken } from '../../utils/helpers'
+import { succeedLogin } from '../../store/local/authentication/actions'
 
 const LoginForm = () => {
-  const onFinish = values => {
-    //console.log('Success:', values)
+  const [login] = useLogin()
+  const dispatch = useDispatch()
+  const [loginLoading, setIsLoginLoading] = React.useState(false)
+
+  const openNotification = (description: string) => {
+    notification.error({
+      message: 'Error',
+      description
+    })
   }
 
-  const onFinishFailed = errorInfo => {
-    //console.log('Failed:', errorInfo)
+  const onFinish = ({ email, password }: { email: string, password: string }) => {
+    setIsLoginLoading(true)
+
+    login(email, password).then(response => {
+      setIsLoginLoading(false)
+      if (response.hasError) {
+        return openNotification(response.message)
+      }
+
+      setUserToken(response.token)
+      dispatch(succeedLogin())
+    })
+  }
+
+  const onFinishFailed = () => {
+    setIsLoginLoading(false)
+    openNotification('Please enter a valid Email or Password')
   }
 
   return (
@@ -30,12 +56,22 @@ const LoginForm = () => {
           onFinishFailed={onFinishFailed}
         >
           <Form.Item
-            name='username'
-            rules={[{ required: true, message: 'Please input your Username!' }]}
+            name='email'
+            rules={[
+              {
+                type: 'email',
+                message: 'The input is not valid E-mail!'
+              },
+              {
+                required: true,
+                message: 'Please input your E-mail!'
+              }
+            ]}
           >
             <Input
+              autoComplete='off'
+              placeholder='Email'
               prefix={<UserOutlined className='site-form-item-icon' />}
-              placeholder='Username'
             />
           </Form.Item>
           <Form.Item
@@ -50,9 +86,13 @@ const LoginForm = () => {
           </Form.Item>
 
           <Form.Item>
-            <Button type='primary' htmlType='submit' className='login-form__button'>
-              Log in
-            </Button>
+            {loginLoading ? (
+              <Spin className='login-form__spin' />
+            ) : (
+              <Button type='primary' htmlType='submit' className='login-form__button'>
+                Log in
+              </Button>
+            )}
           </Form.Item>
         </Form>
         <div className='login-form__forgot'>

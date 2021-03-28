@@ -11,6 +11,7 @@ export const logOut = () => ({
   type: LOG_OUT
 })
 
-export const setIsUserLogged = () => ({
-  type: SET_IS_USER_LOGGED
+export const setIsUserLogged = (isLogged: boolean) => ({
+  type: SET_IS_USER_LOGGED,
+  payload: isLogged
 })

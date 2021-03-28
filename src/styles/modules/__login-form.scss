@@ -20,6 +20,11 @@
     }
   }
 
+  &__spin {
+    display: flex;
+    justify-content: center;
+  }
+
   &__col {
     background: $athens-gray;
     border-radius: 4px;

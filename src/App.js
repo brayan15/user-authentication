@@ -4,8 +4,8 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import NotFound from './pages/NotFound'
-import AppContainer from './components/app-container'
 import ProtectedRoute from './pages/ProtectedRoute'
+import AppContainer from './components/app-container'
 // $FlowFixMe
 import './styles/main.scss'
 
