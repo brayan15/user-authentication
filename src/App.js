@@ -1,27 +1,27 @@
 // @flow
 import React from 'react'
-import { Layout, Row, Col } from 'antd'
-import Footer from './components/footer'
-import Header from './components/header'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import LoginForm from './components/login-form'
+import AppContainer from './components/app-container'
 // $FlowFixMe
 import './styles/main.scss'
-import LoginForm from './components/login-form'
 
 function App() {
   return (
     <div className='app'>
-      <Layout className='app__layout'>
-        <Header />
-        <Layout.Content className='container'>
-          <Row className='w-100'>
-            <Col xs={{ span: 24 }} xl={{ span: 20, offset: 2 }}>
-              {/*Router goes here*/}
+      <BrowserRouter>
+        <AppContainer>
+          {/*Router goes here*/}
+          <Switch>
+            <Route exact path='/'>
+              <p>Home</p>
+            </Route>
+            <Route exact path='/login'>
               <LoginForm />
-            </Col>
-          </Row>
-        </Layout.Content>
-        <Footer />
-      </Layout>
+            </Route>
+          </Switch>
+        </AppContainer>
+      </BrowserRouter>
     </div>
   )
 }

@@ -1,7 +1,8 @@
 // @flow
 import React from 'react'
-import { LogoutOutlined } from '@ant-design/icons'
 import { Layout, Row, Col } from 'antd'
+import { LogoutOutlined } from '@ant-design/icons'
+import { Link } from 'react-router-dom'
 
 const Header = () => (
   <Layout.Header className='header'>
@@ -15,10 +16,14 @@ const Header = () => (
         <div className='header__menu-wrapper'>
           <ul className='header__menu-nav'>
             <li className='header__menu-item'>
-              <a href='/' className='header__menu-link'>Home</a>
+              <Link to='/' className='header__menu-link'>
+                Home
+              </Link>
             </li>
             <li className='header__menu-item'>
-              <a href='/' className='header__menu-link'>Album</a>
+              <Link to='/' className='header__menu-link'>
+                Album
+              </Link>
             </li>
             <li className='header__menu-item'>
               <LogoutOutlined className='header__menu-icon' />
