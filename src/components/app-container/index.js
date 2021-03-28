@@ -14,7 +14,7 @@ const AppContainer = ({ children }: PropsT) => {
 
   React.useEffect(() => {
     setUser()
-  }, [])
+  }, []) //eslint-disable-line
 
   return (
     <Layout className='app__layout'>

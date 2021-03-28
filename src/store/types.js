@@ -1,4 +1,5 @@
 // @flow
+import type { UsersStateT } from './app/users/types'
 import type { AuthenticationT } from './local/authentication/types'
 
 export type ActionT = {
@@ -10,5 +11,7 @@ export type AppStateT = {
   +local: {
     +authentication: AuthenticationT
   },
-  +user_authentication: {}
+  +user_authentication: {
+    +users: UsersStateT
+  }
 }
