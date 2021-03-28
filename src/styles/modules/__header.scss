@@ -9,7 +9,7 @@
     color: $white;
   }
 
-  &__menu-nav{
+  &__menu-nav {
     display: flex;
   }
 
@@ -30,11 +30,10 @@
   }
 
   &__menu-icon {
+    color: $white;
     cursor: pointer;
     font-size: 17px;
-    color: $white;
   }
-
 
   @media (max-width: $max-xs) {
     height: auto;

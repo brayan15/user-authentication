@@ -78,7 +78,7 @@ const UserListItem = ({ email }: PropsT) => {
         <p>
           <b>Email:</b> {email}
         </p>
-        <p>
+        <p className='text-justify'>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab amet animi architecto
           asperiores blanditiis cumque, cupiditate dolorem, dolorum ducimus ex excepturi facere
           incidunt nisi odit quis quisquam, reiciendis rem temporibus.
