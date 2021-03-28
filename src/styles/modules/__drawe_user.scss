@@ -1,0 +1,32 @@
+.drawer-user {
+  .ant-drawer-body {
+    padding-bottom: 80px;
+  }
+
+  .ant-drawer-content-wrapper {
+    width: 400px;
+  }
+
+  &__form-button {
+    background: $midnight;
+    border-color: $midnight;
+    display: block;
+    margin: 0 auto;
+
+    &:hover,
+    &:focus {
+      background: $midnight;
+      border-color: $midnight;
+    }
+  }
+
+  &__form-spin {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__bottom-button {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

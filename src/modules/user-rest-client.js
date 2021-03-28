@@ -28,6 +28,18 @@ class UserRestClient {
   getUsers = () => {
     return this._authApi.get('users?per_page=12').then(({ data }) => data)
   }
+
+  /**
+   * Get users from api
+   * @return {Promise}
+   */
+
+  // URL with param, this is because I know total of users, for that reason I'm getting user in this way
+  updateUser = (userId, email, first_name, last_name) => {
+    return this._authApi
+      .put(`users/${userId}`, { email, first_name, last_name })
+      .then(({ data }) => data)
+  }
 }
 
 const userRestClient = new UserRestClient()
