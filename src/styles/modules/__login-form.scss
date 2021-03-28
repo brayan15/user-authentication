@@ -1,0 +1,48 @@
+.login-form {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  margin: 20px 0;
+
+  &__title {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  &__button {
+    background: $midnight;
+    border-color: $midnight;
+    display: block;
+    margin: 0 auto;
+
+    &:hover,
+    &:focus {
+      background: $midnight;
+      border-color: $midnight;
+    }
+  }
+
+  &__col {
+    background: $athens-gray;
+    border-radius: 4px;
+    padding: 50px 100px;
+  }
+
+  &__forgot {
+    text-align: center;
+  }
+
+  &__forgot_link {
+    color: $midnight;
+
+    &:hover {
+      color: inherit;
+      text-decoration: underline;
+    }
+  }
+
+  @media (max-width: $max-xs) {
+    &__col {
+      padding: 30px;
+    }
+  }
+}

@@ -5,6 +5,7 @@ import Footer from './components/footer'
 import Header from './components/header'
 // $FlowFixMe
 import './styles/main.scss'
+import LoginForm from './components/login-form'
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
           <Row className='w-100'>
             <Col xs={{ span: 24 }} xl={{ span: 20, offset: 2 }}>
               {/*Router goes here*/}
-              <p>content</p>
+              <LoginForm />
             </Col>
           </Row>
         </Layout.Content>
