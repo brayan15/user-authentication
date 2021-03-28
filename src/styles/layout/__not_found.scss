@@ -1,0 +1,14 @@
+.not-found {
+  @extend .vertical-center;
+
+  justify-content: center;
+
+  &__link {
+    color: $midnight;
+
+    &:hover{
+      color: inherit;
+      text-decoration: underline;
+    }
+  }
+}

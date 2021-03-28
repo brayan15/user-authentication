@@ -2,6 +2,7 @@
 import React from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import Home from './pages/Home'
+import NotFound from './pages/NotFound'
 import LoginForm from './components/login-form'
 import AppContainer from './components/app-container'
 // $FlowFixMe
@@ -19,6 +20,9 @@ function App() {
             </Route>
             <Route exact path='/login'>
               <LoginForm />
+            </Route>
+            <Route path='*'>
+              <NotFound />
             </Route>
           </Switch>
         </AppContainer>
