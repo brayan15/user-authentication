@@ -1,12 +1,13 @@
 // @flow
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { PlusOutlined } from '@ant-design/icons'
 import { Card, Button, notification } from 'antd'
 import DrawerUser from '../drawer-user'
 import useUpdateUser from '../../hooks/useUpdateUser'
 import type { UserT } from '../../store/app/users/types'
 import { makeGetUserByEmail } from '../../store/app/users/selectors'
+import { successUpdateUser } from '../../store/app/users/actions'
 
 type PropsT = {
   email: string
@@ -26,6 +27,7 @@ const messageTypes = {
 }
 
 const UserListItem = ({ email }: PropsT) => {
+  const dispatch = useDispatch()
   const userData = makeGetUserByEmail()
   const [updateUser] = useUpdateUser()
   const [showDrawer, setShowDrawer] = React.useState(false)
@@ -58,6 +60,8 @@ const UserListItem = ({ email }: PropsT) => {
 
         return openNotification(messageTypes['ERROR'])
       }
+
+      dispatch(successUpdateUser({ email, first_name, last_name, avatar }))
 
       return openNotification(messageTypes['SUCCESS'])
     })
