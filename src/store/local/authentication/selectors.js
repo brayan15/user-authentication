@@ -1,5 +1,5 @@
-import type { AppStateT } from '../../types'
 import { createSelector } from 'reselect'
+import type { AppStateT } from '../../types'
 
 const getAuthenticationData = (state: AppStateT) => state.local.authentication
 

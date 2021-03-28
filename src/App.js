@@ -2,9 +2,10 @@
 import React from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import Home from './pages/Home'
+import Login from './pages/Login'
 import NotFound from './pages/NotFound'
-import LoginForm from './components/login-form'
 import AppContainer from './components/app-container'
+import ProtectedRoute from './pages/ProtectedRoute'
 // $FlowFixMe
 import './styles/main.scss'
 
@@ -15,11 +16,11 @@ function App() {
         <AppContainer>
           {/*Router goes here*/}
           <Switch>
-            <Route exact path='/'>
+            <ProtectedRoute exact path='/'>
               <Home />
-            </Route>
+            </ProtectedRoute>
             <Route exact path='/login'>
-              <LoginForm />
+              <Login />
             </Route>
             <Route path='*'>
               <NotFound />
