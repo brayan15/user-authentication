@@ -33,11 +33,6 @@ const Header = () => {
                   Home
                 </Link>
               </li>
-              <li className='header__menu-item'>
-                <Link to='/' className='header__menu-link'>
-                  Album
-                </Link>
-              </li>
               {isLogged ? (
                 <li className='header__menu-item'>
                   <Button

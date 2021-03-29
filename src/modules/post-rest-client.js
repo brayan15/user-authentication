@@ -3,6 +3,7 @@ import axios from 'axios'
 class PostsRestClient {
   constructor() {
     this._authApi = axios.create({
+      // I'm not using .env so as not to complicate the test
       baseURL: 'https://jsonplaceholder.typicode.com/',
       headers: {
         'Content-Type': 'application/json'
