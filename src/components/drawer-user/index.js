@@ -1,9 +1,15 @@
+// @flow
 import React from 'react'
 import { UserOutlined } from '@ant-design/icons'
-import { Drawer, Form, Button, Input, Spin, Avatar } from 'antd'
-import type { UserT } from '../../store/app/users/types'
+import { useDispatch, useSelector } from 'react-redux'
+import { Drawer, Form, Button, Input, Spin, Avatar, List } from 'antd'
+import PostListItem from '../post-list-item'
+import useGetPosts from '../../hooks/useGetPosts'
+import type { UserBaseT, UpdateUserT } from '../../store/app/users/types'
+import { setSuccessPosts } from '../../store/app/users/actions'
+import { makeGetPostsByUserIdAsArray } from '../../store/app/users/selectors'
 
-type PropsT = UserT & {
+type PropsT = UserBaseT & {
   visible: boolean,
   onSave: Function,
   onClose: Function,
@@ -11,6 +17,7 @@ type PropsT = UserT & {
 }
 
 const DrawerUser = ({
+  id,
   email,
   avatar,
   onSave,
@@ -20,6 +27,24 @@ const DrawerUser = ({
   first_name,
   isLoadingUpdate
 }: PropsT) => {
+  const dispatch = useDispatch()
+  const [getPosts] = useGetPosts()
+  const postsAsArray = makeGetPostsByUserIdAsArray()
+  const posts = useSelector(state => postsAsArray(state, id))
+  const params = {
+    params: {
+      userId: id
+    }
+  }
+
+  React.useEffect(() => {
+    getPosts(params).then(response => {
+      if (response.hasError) return
+
+      dispatch(setSuccessPosts(response, id))
+    })
+  }, [])
+
   return (
     <Drawer
       width={400}
@@ -28,8 +53,10 @@ const DrawerUser = ({
       className='drawer-user'
       title={
         <div className='drawer-user__title'>
-          <Avatar src={avatar}  className='drawer-user__title-avatar'/>
-          <p className='drawer-user__title-name'>Edit {first_name} {last_name}</p>
+          <Avatar src={avatar} className='drawer-user__title-avatar' />
+          <p className='drawer-user__title-name'>
+            Edit {first_name} {last_name}
+          </p>
         </div>
       }
       footer={
@@ -45,7 +72,7 @@ const DrawerUser = ({
           first_name,
           last_name
         }}
-        onFinish={(formData: BasicUserT) => onSave(formData)}
+        onFinish={(formData: UpdateUserT) => onSave(formData)}
       >
         <Form.Item name='email' label='Email'>
           <Input disabled prefix={<UserOutlined className='site-form-item-icon' />} />
@@ -94,6 +121,21 @@ const DrawerUser = ({
           )}
         </Form.Item>
       </Form>
+      <div>
+        <h2>Blog Posts</h2>
+        <List
+          itemLayout='horizontal'
+          dataSource={posts}
+          pagination={{
+            pageSize: 2
+          }}
+          renderItem={postId => (
+            <List.Item>
+              <PostListItem userId={id} postId={postId} avatar={avatar} />
+            </List.Item>
+          )}
+        />
+      </div>
     </Drawer>
   )
 }

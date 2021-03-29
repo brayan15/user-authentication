@@ -1,16 +1,16 @@
 // @flow
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { PlusOutlined } from '@ant-design/icons'
 import { Card, Button, notification } from 'antd'
+import { useDispatch, useSelector } from 'react-redux'
 import DrawerUser from '../drawer-user'
 import useUpdateUser from '../../hooks/useUpdateUser'
-import type { UserT } from '../../store/app/users/types'
-import { makeGetUserByEmail } from '../../store/app/users/selectors'
+import { makeGetUserById } from '../../store/app/users/selectors'
 import { successUpdateUser } from '../../store/app/users/actions'
+import type { UpdateUserT, UserT } from '../../store/app/users/types'
 
 type PropsT = {
-  email: string
+  userId: number
 }
 
 const messageTypes = {
@@ -26,13 +26,15 @@ const messageTypes = {
   }
 }
 
-const UserListItem = ({ email }: PropsT) => {
+const UserListItem = ({ userId }: PropsT) => {
   const dispatch = useDispatch()
-  const userData = makeGetUserByEmail()
+  const userData = makeGetUserById()
   const [updateUser] = useUpdateUser()
   const [showDrawer, setShowDrawer] = React.useState(false)
   const [isLoadingUpdate, setIsLoadingUpdate] = React.useState(false)
-  const { id, first_name, avatar, last_name }: UserT = useSelector(state => userData(state, email))
+  const { id, first_name, avatar, last_name, email, posts }: UserT = useSelector(state =>
+    userData(state, userId)
+  )
 
   const openNotification = ({
     type,
@@ -49,10 +51,10 @@ const UserListItem = ({ email }: PropsT) => {
     })
   }
 
-  const onUpdateUser = ({ email, first_name, last_name }: UserT) => {
+  const onUpdateUser = (formData: UpdateUserT) => {
     setIsLoadingUpdate(true)
 
-    updateUser({ id, email, first_name, last_name }).then(response => {
+    updateUser({ ...formData, id }).then(response => {
       setIsLoadingUpdate(false)
 
       if (response.hasError) {
@@ -61,7 +63,7 @@ const UserListItem = ({ email }: PropsT) => {
         return openNotification(messageTypes['ERROR'])
       }
 
-      dispatch(successUpdateUser({ email, first_name, last_name, avatar }))
+      dispatch(successUpdateUser({ ...formData, id, avatar, posts }))
 
       return openNotification(messageTypes['SUCCESS'])
     })
@@ -71,9 +73,9 @@ const UserListItem = ({ email }: PropsT) => {
     <>
       <Card
         className='user-list__item'
-        extra={<Button type='link' onClick={() => setShowDrawer(true)} icon={<PlusOutlined />} />}
         title={`${first_name}, ${last_name}`}
         cover={<img alt='example' src={avatar} className='user-list__photo' />}
+        extra={<Button type='link' onClick={() => setShowDrawer(true)} icon={<PlusOutlined />} />}
       >
         <p>
           <b>Email:</b> {email}
@@ -85,6 +87,7 @@ const UserListItem = ({ email }: PropsT) => {
         </p>
       </Card>
       <DrawerUser
+        id={id}
         email={email}
         avatar={avatar}
         visible={showDrawer}

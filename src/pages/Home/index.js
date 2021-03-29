@@ -53,7 +53,7 @@ const Home = () => {
           dataSource={users}
           renderItem={user => (
             <List.Item>
-              <UserListItem email={user} />
+              <UserListItem userId={user} />
             </List.Item>
           )}
         />

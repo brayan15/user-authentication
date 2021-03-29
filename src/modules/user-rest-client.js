@@ -30,11 +30,10 @@ class UserRestClient {
   }
 
   /**
-   * Get users from api
+   * Update user from api
    * @return {Promise}
    */
 
-  // URL with param, this is because I know total of users, for that reason I'm getting user in this way
   updateUser = (userId, email, first_name, last_name) => {
     return this._authApi
       .put(`users/${userId}`, { email, first_name, last_name })
