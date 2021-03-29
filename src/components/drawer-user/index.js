@@ -43,7 +43,7 @@ const DrawerUser = ({
 
       dispatch(setSuccessPosts(response, id))
     })
-  }, [])
+  }, [])//eslint-disable-line
 
   return (
     <Drawer
